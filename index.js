@@ -1,8 +1,12 @@
+console.log('hola mundo');
 const { MongoClient } = require("mongodb")
-require('dotenev')
-
-const url = 'mongodb+srv://lunahazuki2006:cXU0lYhSncWZ12FM@cluster0.owjghpf.mongodb.net/'
-const tabla = document.getElementById('tabla')
+require('dotenv').config()
+const mongoClient = new MongoClient(process.env.MONGODB_URI)
+const promesa = mongoClient.connect()
+const manejador = async (event) => {
+    
+}
+// const tabla = document.getElementById('tabla')
 function mostrar() {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err
