@@ -10,36 +10,17 @@ const manejador = async (event) => {
         const collection = database.collection(process.env.MONGODB_COLLECTION)
         const resultados = await collection.find({}).limit(10).toArray()
         console.log(resultados);
+        mongoClient.close(true)
+        return {
+            statusCode: 200, 
+            body: JSON.stringify(resultados)
+        }
     } catch (error) {
         return { statusCode: 500, body: error.toString() }
     }
 }
 manejador()
-// module.exports = { manejador }
-
-// const tabla = document.getElementById('tabla')
-// function mostrar() {
-//     MongoClient.connect(url, function(err, db) {
-//         if (err) throw err
-//         let transformacion = db.db('estudiantes')
-//         transformacion.collection('estudiantes').find(function(err, result) {
-//             if (err) throw err
-//             console.log(result);
-//             // llenar(result)
-//             db.close()
-//         })
-//     })
-// }
-// function llenar(objeto) {
-//     let texto = ''
-//     for (const cosa in objeto) {
-//         texto += '<tr>'
-//         texto += '<td>' + cosa['nombre'] + '</td>'
-//         texto += '<td>' + cosa['edad'] + '</td>'
-//         texto += '<td>' + cosa['frase'] + '</td>'
-//         texto += '</tr>'
-//     }
-//     tabla.innerText += texto
-// }
-
-// mostrar()
+const esto = document.createElement('p')
+esto.innerText = "lo logré"
+esto.style.color = "red"
+document.getElementById('cuerpo').appendChild(esto)
