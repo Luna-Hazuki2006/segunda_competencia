@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb")
+require('dotenev')
 
 const url = 'mongodb+srv://lunahazuki2006:cXU0lYhSncWZ12FM@cluster0.owjghpf.mongodb.net/'
 const tabla = document.getElementById('tabla')
@@ -9,21 +10,21 @@ function mostrar() {
         transformacion.collection('estudiantes').find(function(err, result) {
             if (err) throw err
             console.log(result);
-            llenar(result)
+            // llenar(result)
             db.close()
         })
     })
 }
-function llenar(objeto) {
-    let texto = ''
-    for (const cosa in objeto) {
-        texto += '<tr>'
-        texto += '<td>' + cosa['nombre'] + '</td>'
-        texto += '<td>' + cosa['edad'] + '</td>'
-        texto += '<td>' + cosa['frase'] + '</td>'
-        texto += '</tr>'
-    }
-    tabla.innerText += texto
-}
+// function llenar(objeto) {
+//     let texto = ''
+//     for (const cosa in objeto) {
+//         texto += '<tr>'
+//         texto += '<td>' + cosa['nombre'] + '</td>'
+//         texto += '<td>' + cosa['edad'] + '</td>'
+//         texto += '<td>' + cosa['frase'] + '</td>'
+//         texto += '</tr>'
+//     }
+//     tabla.innerText += texto
+// }
 
 mostrar()
