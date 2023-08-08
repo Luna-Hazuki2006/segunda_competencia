@@ -1,9 +1,12 @@
 import requests
 from PIL import Image
 
-url = 'https://pbs.twimg.com/media/F2-S13FXsAAet9_?format=jpg&name=900x900'
+url = 'https://pbs.twimg.com/media/F2_dSQDXwAAh4s_?format=jpg&name=small'
 
 data = requests.get(url).content
 
 with open('nueva.png', 'wb') as handler:
     handler.write(data)
+
+imagen = Image.open('nueva.png')
+imagen.show()
