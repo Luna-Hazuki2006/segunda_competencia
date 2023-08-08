@@ -1,7 +1,7 @@
 import requests
 from PIL import Image
 
-url = 'https://pbs.twimg.com/media/F2_dSQDXwAAh4s_?format=jpg&name=small'
+url = input('Escribe el url:\n')
 
 data = requests.get(url).content
 
