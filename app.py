@@ -10,21 +10,20 @@ app.config['SECRET_KEY'] = 'EjVWM23j{,[(G%5D'
 def mostrar():
     return render_template('index.html')
 
-@app.route('/descargar', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def descargar():
     forma = request.form
     if request.method == 'POST':
-        print('HOLAAAAAAAAAAAAAAAAAAAA')
-        print(forma['imagen'])
         try:
             direccion = 'C:\\Users\\user\\Downloads\\'
             data = requests.get(forma['imagen']).content
-            with open(f'{direccion}nueva.png', 'wb') as handler:
+            nombre = forma['nombre']
+            with open(f'{direccion}{nombre}.png', 'wb') as handler:
                 handler.write(data)
             
-            imagen = Image.open(f'{direccion}nueva.png')
+            imagen = Image.open(f'{direccion}{nombre}.png')
             imagen.show()
-            imagen.save(f'{direccion}nueva.ico', format='ICO')
+            imagen.save(f'{direccion}{nombre}.ico', format='ICO')
         except UnidentifiedImageError or TypeError or ValueError or FileNotFoundError:
             flash('Bueh... Parece que algo salió mal... Pero no te preocupes, no es tu culpa (es culpa de tu imagen :V)')
         except Exception:
