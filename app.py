@@ -18,12 +18,15 @@ def descargar():
             direccion = 'C:\\Users\\user\\Downloads\\'
             data = requests.get(forma['imagen']).content
             nombre = forma['nombre']
-            with open(f'{direccion}{nombre}.png', 'wb') as handler:
-                handler.write(data)
-            
+            with open(f'{direccion}{nombre}.png', 'wb') as esto:
+                esto.write(data)
             imagen = Image.open(f'{direccion}{nombre}.png')
             imagen.show()
-            imagen.save(f'{direccion}{nombre}.ico', format='ICO')
+            size = imagen.size
+            ico = Image.new(mode="RGBA", size=(max(size), max(size)), color=(0, 0, 0, 0))
+            ico.paste(imagen, (int((max(size)-size[0])/2), int((max(size)-size[1])/2)))
+            ico.save(f"{direccion}{nombre}.ico", format='ICO', quality=1000)
+            ico.show()
         except UnidentifiedImageError or TypeError or ValueError or FileNotFoundError:
             flash('Bueh... Parece que algo salió mal... Pero no te preocupes, no es tu culpa (es culpa de tu imagen :V)')
         except Exception:
