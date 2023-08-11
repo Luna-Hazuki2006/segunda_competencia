@@ -1,0 +1,15 @@
+{% extends './index.html' %}
+<section>
+    <h2>Transformador de urls a imágenes descargadas</h2>
+    <form method="post">
+        <div>
+            <label for="imagen">Url de imagen a descargar: </label>
+            <input type="text" name="imagen" id="imagen" value="{{ request.form['imagen'] }}" required>
+        </div>
+        <div>
+            <label for="nombre">Nombre de la imagen: </label>
+            <input type="text" name="nombre" id="nombre" value="{{ request.form['nombre'] }}" required>
+        </div>
+        <button type="submit">Descargar</button>
+    </form>
+</section>

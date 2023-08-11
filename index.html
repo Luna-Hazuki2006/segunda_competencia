@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
-    <title>{% block title %}Competencia{% endblock %}</title>
+    <title>{% block title %}Transformador para usos casuales{% endblock %}</title>
     <style>
         body {
             background-color: lavender;
@@ -22,24 +22,17 @@
             color: red;
             font-weight: bolder;
         }
+        h1 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+    <h1>Transformador para usos casuales</h1>
     {% for mensajes in get_flashed_messages() %}
     <p class="mensajes">{{ mensajes }}</p>
     {% endfor %}
     {% block content %}
-    <form method="post">
-        <div>
-            <label for="imagen">Url de imagen a descargar: </label>
-            <input type="text" name="imagen" id="imagen" value="{{ request.form['imagen'] }}" required>
-        </div>
-        <div>
-            <label for="nombre">Nombre de la imagen: </label>
-            <input type="text" name="nombre" id="nombre" value="{{ request.form['nombre'] }}" required>
-        </div>
-        <button type="submit">Descargar</button>
-    </form>
     {% endblock %}
 </body>
 </html>
