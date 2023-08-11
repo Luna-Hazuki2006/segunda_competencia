@@ -43,19 +43,14 @@ def encriptar():
         secreto = Fernet.generate_key()
         encriptador = Fernet(secreto)
         encriptado = encriptador.encrypt(bytes(texto, 'utf-8'))
+        data = {
+            'encriptado': encriptado, 
+            'llave': secreto
+        }
         print(encriptado)
-        with open(f'{direccion}contraseña.txt', 'w+') as esto:
-            esto.write('Texto encriptado: \n')
-            esto.write(str(encriptado))
-            esto.write('\nClave: \n')
-            esto.write(str(secreto))
+        with open(f'{direccion}contraseña.json', 'w+') as esto:
+            json.dump(data, esto)
         final = str(encriptado)
-        with open(f'{direccion}contraseña.txt', 'r') as esto:
-            # print(esto.read())
-            print(esto.readline())
-            print(esto.readline())
-            print(esto.readline())
-            print(esto.readline())
         flash('Se creó el archivo de texto con la información encriptada con éxito')
         render_template('/encriptar/index.html', encriptado=final)
     return render_template('/encriptar/index.html')
