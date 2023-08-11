@@ -10,3 +10,10 @@ table {
     margin-left: auto;
     margin-right: auto;
 }
+.mensajes {
+    color: red;
+    font-weight: bolder;
+}
+h1 {
+    text-align: center;
+}

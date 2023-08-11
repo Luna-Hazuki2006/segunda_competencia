@@ -5,10 +5,11 @@
     <form method="post">
         <div>
             <label for="texto">Texto: </label>
-            <input type="text" name="texto" id="texto" value="{{ request.form['imagen'] }}">
+            <input type="text" name="texto" id="texto" value="{{ request.form['imagen'] }}" readonly>
         </div>
         <div>
-
+            <label for="encriptado">Texto encriptado: </label>
+            <input type="text" name="encriptado" id="encriptado" value="{{ request.form['encriptado'] }}" readonly>
         </div>
     </form>
 </section>
