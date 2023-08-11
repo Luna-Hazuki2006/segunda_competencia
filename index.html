@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='index.js') }}" defer></script>
     <title>{% block title %}Transformador para usos casuales{% endblock %}</title>
 </head>
 <body>
     <h1>Transformador para usos casuales</h1>
+    <button type="button" onclick="hola();">Hola mundo :D</button>
     {% for mensajes in get_flashed_messages() %}
     <p class="mensajes">{{ mensajes }}</p>
     {% endfor %}
