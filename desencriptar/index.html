@@ -1,0 +1,21 @@
+{% extends './index.html' %}
+
+{% block content %}
+<section>
+    <h2>Transformador de texto a texto encriptado</h2>
+    <p>
+        Este método de encriptado funciona con el método de Fernet, <br> 
+        se usará el archivo contraseña.txt para conseguir la información a desencriptar, <br>
+        se creará un archivo desencriptado.txt en la carpeta de descargas del dispositivo <br>
+        en la cual estará el texto descriptado y su clave. <br>
+        Si va a usar esta información para algo importante ¡no la comparta con nadie!
+    </p>
+    <form method="post">
+        <button type="submit">Desencriptar</button>
+    </form>
+    <p>
+        El texto dencriptado es: <br>
+        {{ texto }}
+    </p>
+</section>
+{% endblock %}

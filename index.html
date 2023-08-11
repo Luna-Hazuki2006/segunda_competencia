@@ -19,6 +19,9 @@
             <li>
                 <a href="{{ url_for('encriptar') }}">Transformador de texto a texto encriptado</a>
             </li>
+            <li>
+                <a href="{{ url_for('desencriptar') }}">Transformador de texto encriptado a texto normal</a>
+            </li>
         </ul>
     </nav>
     {% for mensajes in get_flashed_messages() %}
