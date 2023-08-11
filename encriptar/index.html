@@ -1,15 +1,25 @@
-{% extends {% './index.html' %} %}
+{% extends './index.html' %}
 
+{% block content %}
 <section>
     <h2>Transformador de texto a texto encriptado</h2>
+    <p>
+        Este método de encriptado funciona con el método de Fernet, <br> 
+        se creará un archivo contraseña.txt en la carpeta de descargas del dispositivo <br>
+        en la cual estará el texto encriptado y su clave autogenerada. <br>
+        Si va a usar esta información para algo importante ¡no la comparta con nadie!
+    </p>
     <form method="post">
         <div>
-            <label for="texto">Texto: </label>
-            <input type="text" name="texto" id="texto" value="{{ request.form['imagen'] }}" readonly>
+            <label for="texto">Texto: </label><br>
+            <textarea name="texto" id="texto" cols="30" rows="10" required>{{ request.form['nombre'] }}</textarea>
+            <!-- <input type="text" name="texto" id="texto" value="{{ request.form['nombre'] }}" required> -->
         </div>
-        <div>
-            <label for="encriptado">Texto encriptado: </label>
-            <input type="text" name="encriptado" id="encriptado" value="{{ request.form['encriptado'] }}" readonly>
-        </div>
+        <!-- <div>
+            <label for="llave">Palabra clave: </label>
+            <input type="text" name="llave" id="llave" value="{{ request.form['llave'] }}">
+        </div> -->
+        <button type="submit">Encriptar</button>
     </form>
 </section>
+{% endblock %}

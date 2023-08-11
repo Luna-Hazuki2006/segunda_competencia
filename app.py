@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, flash
 # EGG jack VISA WALMART MUSIC 2 3 jack { , [ ( GOLF % 5 DRIP 
 app = Flask(__name__, template_folder='./')
 app.config['SECRET_KEY'] = 'EjVWM23j{,[(G%5D'
+direccion = 'C:\\Users\\user\\Downloads\\'
 
 @app.route('/')
 def mostrar():
@@ -16,7 +17,6 @@ def descargar():
     forma = request.form
     if request.method == 'POST':
         try:
-            direccion = 'C:\\Users\\user\\Downloads\\'
             data = requests.get(forma['imagen']).content
             nombre = forma['nombre']
             with open(f'{direccion}{nombre}.png', 'wb') as esto:
@@ -39,7 +39,21 @@ def encriptar():
     forma = request.form
     if request.method == 'POST':
         texto = forma['texto']
-    return render_template('/ecriptar/index.html')
+        # llave = forma['llave']
+
+        secreto = Fernet.generate_key()
+        encriptador = Fernet(secreto)
+        encriptado = encriptador.encrypt(bytes(texto, 'utf-8'))
+        print(encriptado)
+        with open(f'{direccion}contraseña.txt', 'w+') as esto:
+            esto.write('Texto encriptado\n')
+            esto.write(str(encriptado))
+            esto.write('\nClave\n')
+            esto.write(str(secreto))
+        final = str(encriptado)
+        flash('Se creó el archivo de texto con la información encriptada con éxito')
+        render_template('/encriptar/index.html', encriptado=final)
+    return render_template('/encriptar/index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
