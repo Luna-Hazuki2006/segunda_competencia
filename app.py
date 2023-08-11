@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = 'EjVWM23j{,[(G%5D'
 def mostrar():
     return render_template('index.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/imagenes', methods=['GET', 'POST'])
 def descargar():
     forma = request.form
     if request.method == 'POST':
@@ -31,7 +31,14 @@ def descargar():
             flash('Bueh... Parece que algo salió mal... Pero no te preocupes, no es tu culpa (es culpa de tu imagen :V)')
         except Exception:
             flash('Bueh... Parece que algo salió mal... Puede que sea tu culpa... Como puede que sea que no')
-    return render_template('index.html') 
+    return render_template('/imagenes/index.html') 
+
+@app.route('/encriptar', methods=['GET', 'POST'])
+def encriptar():
+    forma = request.form
+    if request.method == 'POST':
+        texto = forma['texto']
+    return render_template('/ecriptar/index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
