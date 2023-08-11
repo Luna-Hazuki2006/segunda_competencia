@@ -1,4 +1,5 @@
 import requests
+
 from PIL import Image
 from PIL import UnidentifiedImageError
 from flask import Flask, render_template, request, flash
