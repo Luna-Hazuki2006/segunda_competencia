@@ -1,5 +1,5 @@
 import requests
-
+from cryptography.fernet import Fernet
 from PIL import Image
 from PIL import UnidentifiedImageError
 from flask import Flask, render_template, request, flash
