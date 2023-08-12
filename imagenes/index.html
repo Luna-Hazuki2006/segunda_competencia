@@ -4,18 +4,26 @@
 <section>
     <h2>Transformador de urls a imágenes descargadas</h2>
     <p>
-        
+        Con esta función se podrá utilizar urls de imagenes para transformarlas a imagenes descargadas <br>
+        esto también tiene una funcionalidad de transformar la imagen descargada a una aparte en formato ico <br>
+        Aunque esta última función aún es una beta
     </p>
     <form method="post">
         <div>
             <label for="imagen">Url de imagen a descargar: </label>
-            <input type="text" name="imagen" id="imagen" value="{{ request.form['imagen'] }}" required>
+            <input type="text" name="imagen" id="imagen" size="50" value="{{ request.form['imagen'] }}" required>
         </div>
         <div>
             <label for="nombre">Nombre de la imagen: </label>
-            <input type="text" name="nombre" id="nombre" value="{{ request.form['nombre'] }}" required>
+            <input type="text" name="nombre" id="nombre" size="50" value="{{ request.form['nombre'] }}" required>
         </div>
-        <button type="submit">Descargar</button>
+        <div>
+            <label for="direccion">Dirección de carpeta: </label><br>
+            <input type="text" name="direccion" id="direccion" size="50" value="{{ request.form['direccion'] }}" required>
+        </div>
+        <div>
+            <button type="submit">Descargar</button>
+        </div>
     </form>
 </section>
 {% endblock %}
