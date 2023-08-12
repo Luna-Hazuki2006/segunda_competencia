@@ -44,7 +44,6 @@ def encriptar():
         secreto = Fernet.generate_key()
         encriptador = Fernet(secreto)
         encriptado = encriptador.encrypt(bytes(texto, 'utf-8'))
-        print(encriptado)
         with open(f'{direccion}contraseña.txt', 'w+') as esto:
             esto.writelines([
                 'Texto encriptado: \n', 
@@ -52,9 +51,8 @@ def encriptar():
                 '\nClave: \n', 
                 str(secreto, 'utf-8')
             ])
-        final = str(encriptado)
         flash('Se creó el archivo de texto con la información encriptada con éxito')
-        render_template('/encriptar/index.html', encriptado=final)
+        render_template('/encriptar/index.html')
     return render_template('/encriptar/index.html')
 
 @app.route('/desencriptar', methods=['GET', 'POST'])
@@ -67,15 +65,9 @@ def desencriptar():
             encriptado = esto.readline()
             esto.readline()
             llave = esto.readline()
-        print('esto')
-        print(llave)
-        print('esto')
-        print(encriptado)
         llave = bytes(llave, 'utf-8')
-        print(llave.decode('utf-8'))
         encriptador = Fernet(llave)
         texto = encriptador.decrypt(encriptado)
-        print(texto)
         with open(f'{direccion}desencriptado.txt', 'w+') as esto:
             esto.writelines([
                 'Texto desencriptado: \n', 
