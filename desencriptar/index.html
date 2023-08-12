@@ -6,16 +6,18 @@
     <p>
         Este método de encriptado funciona con el método de Fernet, <br> 
         se usará el archivo contraseña.txt para conseguir la información a desencriptar, <br>
-        se creará un archivo desencriptado.txt en la carpeta de descargas del dispositivo <br>
+        se creará un archivo desencriptado.txt en la carpeta seleccionada del dispositivo <br>
         en la cual estará el texto descriptado y su clave. <br>
         Si va a usar esta información para algo importante ¡no la comparta con nadie!
     </p>
     <form method="post">
-        <button type="submit">Desencriptar</button>
+        <div>
+            <label for="direccion">Dirección de carpeta: </label><br>
+            <input type="text" name="direccion" id="direccion" size="50" value="{{ request.form['direccion'] }}" required>
+        </div>
+        <div>
+            <button type="submit">Desencriptar</button>
+        </div>
     </form>
-    <p>
-        El texto dencriptado es: <br>
-        {{ texto }}
-    </p>
 </section>
 {% endblock %}

@@ -1,13 +1,12 @@
 import requests
 from cryptography.fernet import Fernet
-import json
 from PIL import Image
 from PIL import UnidentifiedImageError
 from flask import Flask, render_template, request, flash
 # EGG jack VISA WALMART MUSIC 2 3 jack { , [ ( GOLF % 5 DRIP 
 app = Flask(__name__, template_folder='./')
 app.config['SECRET_KEY'] = 'EjVWM23j{,[(G%5D'
-direccion = 'C:\\Users\\user\\Downloads\\'
+direccion = 'C:\\Users\\d\\Downloads\\'
 
 @app.route('/')
 def mostrar():
@@ -18,6 +17,7 @@ def descargar():
     forma = request.form
     if request.method == 'POST':
         try:
+            direccion = forma['direccion']
             data = requests.get(forma['imagen']).content
             nombre = forma['nombre']
             with open(f'{direccion}{nombre}.png', 'wb') as esto:
@@ -39,17 +39,19 @@ def descargar():
 def encriptar():
     forma = request.form
     if request.method == 'POST':
+        direccion = forma['direccion']
         texto = forma['texto']
         secreto = Fernet.generate_key()
         encriptador = Fernet(secreto)
         encriptado = encriptador.encrypt(bytes(texto, 'utf-8'))
-        data = {
-            'encriptado': encriptado, 
-            'llave': secreto
-        }
         print(encriptado)
-        with open(f'{direccion}contraseña.json', 'w+') as esto:
-            json.dump(data, esto)
+        with open(f'{direccion}contraseña.txt', 'w+') as esto:
+            esto.writelines([
+                'Texto encriptado: \n', 
+                str(encriptado, 'utf-8'), 
+                '\nClave: \n', 
+                str(secreto, 'utf-8')
+            ])
         final = str(encriptado)
         flash('Se creó el archivo de texto con la información encriptada con éxito')
         render_template('/encriptar/index.html', encriptado=final)
@@ -57,7 +59,6 @@ def encriptar():
 
 @app.route('/desencriptar', methods=['GET', 'POST'])
 def desencriptar():
-    forma = request.form
     if request.method == 'POST':
         encriptado = ''
         llave = ''
@@ -75,13 +76,15 @@ def desencriptar():
         encriptador = Fernet(llave)
         texto = encriptador.decrypt(encriptado)
         print(texto)
-        with open(f'{direccion}desencriptado.txt', 'wb') as esto:
-            esto.write('Texto: \n')
-            esto.write(texto)
-            esto.write('\nClave: \n')
-            esto.write(llave)
+        with open(f'{direccion}desencriptado.txt', 'w+') as esto:
+            esto.writelines([
+                'Texto desencriptado: \n', 
+                str(texto, 'utf-8'), 
+                '\nClave: \n', 
+                str(llave, 'utf-8')
+            ])
         flash('Se creó el archivo con la información desencriptada con éxito')
-        render_template('/desencriptar/index.html', texto=texto)
+        render_template('/desencriptar/index.html')
     return render_template('/desencriptar/index.html')
 
 if __name__ == '__main__':
